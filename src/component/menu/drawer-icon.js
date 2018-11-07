@@ -31,6 +31,7 @@ import dynamicStyle from "../../style/dynamic-style"
 import UserStore from '../../store/user-store';
 import ChapterService from '../../setting/chapter-service';
 import ListButton from '../button/list-button'
+
 const Item = Picker.Item;
 
 @observer class DrawerIcon extends Component {
@@ -38,14 +39,15 @@ const Item = Picker.Item;
   state = {
     open:false,
     progress: new Animated.Value(0),
-    hideCustomNav : ChapterService.routerData.hideCustomNav
+    hideCustomNav : ChapterService.routerData.hideCustomNav,
   }
 
   @observable hideCustomNav = ChapterService.routerData.hideCustomNav
 
+
   animateIconOpen(){
     Animated.timing(this.state.progress, {
-      toValue: 1,
+      toValue: 0.5,
       duration: 1000,
       easing: Easing.quad,
     }).start();
@@ -63,7 +65,7 @@ const Item = Picker.Item;
 
 
   click(){
-    console.log('nav icon click')
+    // console.log('nav icon click')
     if(!this.state.open){
     // Actions.drawerOpen();
     this.props.open();
@@ -85,22 +87,31 @@ const Item = Picker.Item;
     ChapterService.drawerIconToggle = this.drawerIconToggle.bind(this)
   }
 
-  getButton(){
-    return (<Button transparent icon  onPress={()=>{this.click()}} 
-      style={{zIndex:10000000,right:0,top:0,width:50,height:50,opacity:(ChapterService.routerData.hideCustomNav && 1)}}>
-            <LottieView source={drawerIconJson} progress={this.state.progress} cacheStrategy="strong"/>
-    </Button>)
-  }
+  // getButton(){
+  //   if(!this.state.progress || !drawerIconJson)return;
+  //   return (<Button transparent icon  onPress={()=>{this.click()}} 
+  //     style={{zIndex:10000000,right:0,top:0,width:50,height:50,opacity:(ChapterService.routerData.hideCustomNav && 1)}}>
+  //           <LottieView source={drawerIconJson} progress={this.state.progress}/>
+  //   </Button>)
+  // }
 
   render() {
-    console.log(this)
+    // console.log(this)
 
     UserStore.navIconOpen = this.animateIconOpen.bind(this)
     UserStore.navIconClose = this.animateIconClose.bind(this)
 
     return (
-    <View style={[libStyle.absLayerTopRight,{zIndex:10000000,right:0,top:0,width:50,height:50},{height:(this.hideCustomNav ? 0 : 50),opacity:(this.hideCustomNav ? 0 : 1)}]} none={this.hideCustomNav}>
-    {this.getButton()}
+    <View style={[libStyle.absLayerTopRight,{
+      zIndex:10000000,left:0,top:0,width:50,height:50,justifyContent:'center',alignItems:'center'
+    },{height:(this.hideCustomNav ? 0 : 50),opacity:(this.hideCustomNav ? 0 : 1)}]} none={this.hideCustomNav}>
+    {/*this.getButton()*/}
+    <Button transparent icon onPress={()=>{this.click()}} 
+      style={{alignSelf:'center',width:50,height:50,justifyContent:'center',alignItems:'center',opacity:(ChapterService.routerData.hideCustomNav && 1)}}>
+            <View style={{width:50,height:50,justifyContent:'center',alignItems:'center'}}>
+            <LottieView style={{width:200,height:200}} source={drawerIconJson} progress={this.state.progress}/>
+            </View>
+    </Button>
       </View>
     );
   }

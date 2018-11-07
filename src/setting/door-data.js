@@ -10,10 +10,11 @@ export const doorList = [
         boxBg:require('../image/emile-seguin-209058-unsplash-center.jpg'),
         titleBoxStyle:{
             // backgroundColor: 'rgba(255, 255, 255, 0.8)',
-            color:"#333"
         },
         hintStyle:{},
-        titleStyle:{color:"#333"},
+        titleStyle:{
+            color:"#333"
+        },
         hintStyle:{
             // backgroundColor: 'rgba(255, 255, 255, 0.8)',
             color:"#555"

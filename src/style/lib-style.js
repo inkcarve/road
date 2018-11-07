@@ -44,6 +44,10 @@ const libStyleData = {
     marginBottom:0,
     marginLeft:0,
     marginRight:0,
+  },
+  borderBottomCCC:{
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
   }
 }
 

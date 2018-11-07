@@ -21,7 +21,7 @@ import Swiper from 'react-native-deck-swiper'
 import FastImage from 'react-native-fast-image'
 import {observer} from 'mobx-react'
 import {observable} from 'mobx'
-import Carousel from 'react-native-snap-carousel'
+import Carousel , { Pagination } from 'react-native-snap-carousel'
 
 //** import style
 import coreStyle from '../../style/core-style'
@@ -35,21 +35,25 @@ import mapContent from "../text/map-content"
 import FooterNext from "../footer/footer-next"
 import HeaderBox from '../header/header-box'
 import { doorList } from "../../setting/door-data"
+import { chartData, chartList } from "../../setting/chart-data"
 
 
 @observer class PageDoor extends Component<{}> {
   
   handleViewRef = ref => this.view = ref;
 
-  componentDidMount() {
-  }
-
   @observable selectedItem = doorList[0]
+  activeIndex=0
 
   handleViewRef = ref => this.view = ref;
 
+  componentDidMount(){
+    ChapterService.chapterList.chart = chartData
+  }
+
   _renderItem ({item, index}) {
     return (
+      <TouchableOpacity onPress={this.choose.bind(this)}  style={[coreStyle.overlayer,{justifyContent: 'flex-end'}]}>
         <Container style={{flex:1, height:'auto'}}>
             <Card style={[libStyle.m0]}>
               <CardItem style={[{height:"100%"},libStyle.p0]}>
@@ -62,17 +66,16 @@ import { doorList } from "../../setting/door-data"
                     source={item.image} 
                     resizeMode={FastImage.resizeMode[item.imageResizeMode]}
                   />
-                <TouchableOpacity onPress={this.choose.bind(this)}  style={[coreStyle.overlayer,{justifyContent: 'flex-end'}]}>
-                </TouchableOpacity>
-
               </CardItem>
             </Card>
         </Container>
+         </TouchableOpacity>
      );
   }
 
-  changeItem(slideIndex){
-    this.selectedItem=doorList[slideIndex]
+  changeItem(activeIndex){
+    this.selectedItem=doorList[activeIndex]
+    this.activeIndex = activeIndex;
   }
 
   goByName (){
@@ -81,14 +84,35 @@ import { doorList } from "../../setting/door-data"
 
   choose(){
     if(this.selectedItem.goName){
-      console.log(this.view)
       this.view.fadeOut(700).then(endState=>{
-            if(endState){
-        setTimeout(this.goByName.bind(this),500)
+        if(endState){
+            this.goByName.call(this)
         }
       });
     }
   }
+
+    get pagination () {
+        // const { entries, activeSlide } = this.state;
+        return (
+            <Pagination
+              dotsLength={doorList.length}
+              activeDotIndex={this.activeIndex}
+              dotStyle={{
+                  width: 10,
+                  height: 10,
+                  borderRadius: 5,
+                  marginHorizontal: 8,
+                  backgroundColor: 'rgba(0, 0, 0, 0.12)'
+              }}
+              inactiveDotStyle={{
+                  // Define styles for inactive dots here
+              }}
+              inactiveDotOpacity={0.4}
+              inactiveDotScale={0.6}
+            />
+        );
+    }
 
   render() {
     console.warn("page deck swiper render");
@@ -119,9 +143,10 @@ import { doorList } from "../../setting/door-data"
             renderItem={this._renderItem.bind(this)}
             sliderWidth={sliderWidth}
             itemWidth={itemWidth}
-            loop={false}
+            loop={true}
             onSnapToItem={this.changeItem.bind(this)}
           />
+          {this.pagination}
           </View>
           <View style={[coreStyle.containerCenter,libStyle.bgNone,{flex:0 ,width:"100%",}]}>
             <View style={[{flex:0 ,width:itemWidth}, coreStyle.H1, dynamicStyle('m_10')]}>

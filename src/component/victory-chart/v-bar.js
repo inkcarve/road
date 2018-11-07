@@ -45,8 +45,10 @@ class VBar extends Component<{}> {
 
     return (
 
-        <VictoryChart domainPadding={25} {...this.props}>
-  <VictoryBar {...this.props}
+        <VictoryChart domainPadding={25} {...this.props.chartSetting}>
+  <VictoryBar 
+  {...this.props.barSetting} 
+  data={this.props.data}
   />
 </VictoryChart>
 

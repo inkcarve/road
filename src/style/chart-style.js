@@ -28,74 +28,95 @@ export const itemWidth = slideWidth + itemHorizontalMargin * 2;
 
 // console.log(libStyle)
 export const chartStyleData = {
-  carouselBox:{
-    height: vh(60),
-    flex:0,
-  }
+    carouselBox: {
+        height: vh(60),
+        flex: 0,
+    }
 }
 
-export const chartStyle =  StyleSheet.create(chartStyleData);
+export const chartStyle = StyleSheet.create(chartStyleData);
 
 
 // console.log(libStyle)
 export const lineStyle = {
 
-          data: {
-            stroke: primaryColor, strokeWidth: 2
-          },
-          labels: {
-            fontSize: 15,
-            fill: (d) => d.x === 3 ? color.primary : primaryColor
-          },
-          // axis: {stroke: "#756f6a"},
+    data: {
+        stroke: primaryColor,
+        strokeWidth: 2
+    },
+    labels: {
+        fontSize: 10,
+        fill: (d) => d.x === 3 ? color.primary : primaryColor
+    },
+    // axis: {stroke: "#756f6a"},
 }
 
-export let barStyle = {
+export const barStyle = {
 
-          data: {
-            stroke: primaryColor,
-            strokeWidth: 2,
-            fill: primaryColor,
-          },
-          labels: {
-            fontSize: 15,
-            // fill: (d) => {
-            //   console.log("barStyle");
-            //   console.log(this);
-            //   return d.y === 3 ? color.primary : primaryColor
-            // }
-                        // fill: (d) => d.x === 3 ? color.primary : primaryColor
-            // fill: (d) => d.x === "dogs" ? color.primary : primaryColor
+    data: {
+        stroke: primaryColor,
+        strokeWidth: 2,
+        fill: primaryColor,
+    },
+    labels: {
+        fontSize: 10,
+        // fill: (d) => {
+        //   console.log("barStyle");
+        //   console.log(this);
+        //   return d.y === 3 ? color.primary : primaryColor
+        // }
+        // fill: (d) => d.x === 3 ? color.primary : primaryColor
+        // fill: (d) => d.x === "dogs" ? color.primary : primaryColor
 
-          },
-          // axis: {stroke: "#756f6a"},
+    },
+    // axis: {stroke: "#756f6a"},
+}
+
+export const barStyleHorizontal = {
+
+    data: {
+        fill: color.primary,
+    },
+    labels: {
+        fontSize: 10,
+        // fill: (d) => {
+        //   console.log("barStyle");
+        //   console.log(this);
+        //   return d.y === 3 ? color.primary : primaryColor
+        // }
+        // fill: (d) => d.x === 3 ? color.primary : primaryColor
+        // fill: (d) => d.x === "dogs" ? color.primary : primaryColor
+
+    },
+    // axis: {stroke: "#756f6a"},
 }
 
 export const pieStyle = {
 
-          // data: {
-          //   stroke: primaryColor,
-          //   strokeWidth: 2,
-          //   fill: primaryColor,
-          // },
-          labels: {
-            fontSize: 15,
-            fill: (d) => d.x === 3 ? color.primary : primaryColor
-          },
-          // axis: {stroke: "#756f6a"},
+    // data: {
+    //   stroke: primaryColor,
+    //   strokeWidth: 2,
+    //   fill: primaryColor,
+    // },
+    labels: {
+        fontSize: 10,
+        fill: (d) => d.x === 3 ? color.primary : primaryColor
+    },
+    // axis: {stroke: "#756f6a"},
 }
 
 export const polarAreaStyle = {
 
-          data: {
-            // stroke: primaryColor,
-            // strokeWidth: 2,
-            fill: primaryColor,
-            fillOpacity:0.2,
-          },
-          labels: {
-            fontSize: 15,
-            fill: (d) => d.x === 3 ? color.primary : primaryColor
-          },
-          // axis: {stroke: "#756f6a"},
+    data: {
+        // stroke: primaryColor,
+        // strokeWidth: 2,
+        fill: color.primary,
+        fillOpacity: 0.2,
+    },
+    labels: {
+        fontSize: 10,
+        color:color.primary,
+        fill: (d) => d.x === 3 ? color.primary : primaryColor
+    },
+    // axis: {stroke: "#756f6a"},
 }

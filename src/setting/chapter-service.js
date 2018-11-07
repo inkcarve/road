@@ -41,7 +41,7 @@ class ChapterService {
 
     getId(add){
         console.log("getId-----")
-        console.log(this.ids)
+        // console.log(this.ids)
         if(!add)add=0;
         let id = this.ids.id;
         let secId = this.ids.secId +add;
@@ -49,7 +49,7 @@ class ChapterService {
         let nextChapter = this.chapterList[id].pages[secId];
         // console.log()
         // let ids = {id:id,secId:secId};
-        console.log(nextChapter)
+        // console.log(nextChapter)
         if(nextChapter!==undefined){
             return {
                 ids:{id:id,secId:secId},
@@ -71,9 +71,9 @@ class ChapterService {
 
     actions(nextData){
         console.log('action')
-        console.log(this)
+        // console.log(this)
         if(!nextData)nextData=this.chapterData;
-        console.log(nextData)
+        // console.log(nextData)
         Actions[nextData.tpl](this.ids);
         UserStore.set({chapterData:{ids:this.ids}})
     }
@@ -92,18 +92,18 @@ class ChapterService {
         if(!ids)ids=this.ids;
         console.log('setChapterData')
         let chapterData = await this.getChapterNow(ids)
-        console.log(chapterData)
+        // console.log(chapterData)
         if(!chapterData)return false
-        console.log(this)
+        // console.log(this)
         this.chapterData = chapterData
         this.routerData = await routeList[chapterData.tpl]
         this.drawerIconToggle()
-        console.log(this.routerData)
+        // console.log(this.routerData)
         return chapterData
     }
 
     async turnTo(ids){
-         console.log(ids)
+         // console.log(ids)
         let setChapterData = await this.setChapterData(ids)
         this.ids = await ids
         this.actions();
@@ -112,7 +112,7 @@ class ChapterService {
     async go (data){
         let add = 1
         if(data && data.add!==undefined)add = data.add
-        console.log(this)
+        // console.log(this)
         let nextData = await this.getId(add)
         if(!nextData)return false;
         this.ids = nextData.ids
@@ -131,7 +131,7 @@ class ChapterService {
 
     getContent(data){
         console.log("getContent----")
-        console.log(this)
+        // console.log(this)
         return this.chapterData
     }
 

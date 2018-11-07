@@ -1,32 +1,40 @@
 //** import lib
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { Animated, StyleSheet, View, TouchableOpacity, Dimensions, Image, Easing } from 'react-native'
 import * as Animatable from "react-native-animatable"
-import {  Container,
-  Content,
-  Header,
-  Title,
-  Button,
-  IconNB,
-  DeckSwiper,
-  Card,
-  CardItem,
-  Icon,
-  Thumbnail,
-  Text,
-  Left,
-  Right,
-  Body,H1, H2, H3} from "native-base"
+import {
+    Container,
+    Content,
+    Header,
+    Title,
+    Button,
+    IconNB,
+    DeckSwiper,
+    Card,
+    CardItem,
+    Icon,
+    Thumbnail,
+    Text,
+    Left,
+    Right,
+    List,
+    ListItem,
+    Body,
+    H1,
+    H2,
+    H3
+} from "native-base"
 import Swiper from 'react-native-deck-swiper'
 import FastImage from 'react-native-fast-image'
-import {observer} from 'mobx-react'
-import {observable} from 'mobx'
-import Carousel from 'react-native-snap-carousel'
-
+import { observer } from 'mobx-react'
+import { observable } from 'mobx'
+import Carousel, { Pagination } from 'react-native-snap-carousel'
+import Accordion from 'react-native-collapsible/Accordion';
 
 
 //** import style
-import coreStyle from '../../style/core-style'
+import color from '../../style/color';
+import coreStyle, { viewportHeight, viewportWidth, contentPadding } from '../../style/core-style'
 import libStyle from '../../style/lib-style'
 import dynamicStyle from '../../style/dynamic-style'
 
@@ -41,104 +49,156 @@ import HeaderBox from '../header/header-box'
 import { sliderWidth, itemWidth, chartStyle } from '../../style/chart-style';
 import VLine from "../victory-chart/v-line"
 
+const contentPadder = contentPadding(viewportWidth - 80, 420);
+@observer class PageChart extends Component < {} > {
 
-@observer class PageChart extends Component<{}> {
-  
-  handleViewRef = ref => this.view = ref;
+    handleViewRef = ref => this.view = ref;
+    chartList = ChapterService.chapterData.chartList
+    content = ChapterService.chapterData.content
 
-  componentDidMount() {
-  }
+    state={
+      activeSections : ChapterService.chapterData.activeSections ? ChapterService.chapterData.activeSections : []
+    }
 
-  chartList=ChapterService.chapterData.chartList
-  content = ChapterService.chapterData.content
+    _renderSectionTitle = section => {
+        return (
+            <View style={styles.content}>
+        <Text>{section.content}</Text>
+      </View>
+        );
+    };
 
-  @observable selectedItem = this.chartList[0]
-  @observable slideIndex = 0
+    _renderHeader = (item, index, isActive, items) => {
+        return (
+            <View style={[(index+1==items.length?null:libStyle.borderBottomCCC)]}>
+      <Animatable.View
+        duration={300}
+        transition="backgroundColor"
+        style={{ backgroundColor: (isActive ? color.primary : 'rgba(255,255,255,1)')}}>
+        <Animatable.Text
+        transition={["fontSize","color"]}
+        style={[{paddingTop: 20, paddingBottom: 20, textAlign:'center'},(isActive ? {fontSize:14,color:'#ffffff'} : {fontSize:20,color:color.secondary})]}>
+          {item.title}
+        </Animatable.Text>
+        {/*<H3 style={[{paddingTop: 30, paddingBottom: 30, textAlign:'center'},(isActive ? {color:'#ffffff'} : null)]}>{item.title}</H3>*/}
+        </Animatable.View>
+      </View>
+        );
+    };
 
-  chart(){
-    // if(this.selectedItem.chartType)
-  }
+    _renderContent = (item, index, isActive) => {
+        let Chart = item.chartComponent
+        console.log("_renderItem")
+        // console.log(index)
+        if (!Chart) return null;
 
-  _renderItem ({item, index}) {
-    let Chart = this.selectedItem.chartComponent
-    console.log("_renderItem")
-    console.log(this.selectedItem.key)
-        
-
-    return (
-            <Card >
-
-              <CardItem>
-              <Body>
-              {this.slideIndex===index ?(
+        return (
+          <Animatable.View
+        duration={300}
+        transition="backgroundColor"
+        style={{ backgroundColor: (isActive ? color.light : 'rgba(255,255,255,1)'), marginBottom:20 }}>
+        <View style={[libStyle.borderBottomCCC,{justifyContent:'center'}]}>
+              {/*this.slideIndex===index ?(
                 <Chart 
                   data={item.data}
-                  
                   {...item.setting}
-                  />):null
-                  }
+                  />):<Text>Loading</Text>*/
+                  <Body style={{ width:'100%'}}>
+                  <Chart 
+                  data={item.data}
+                  {...item.setting}
+                  />
                   </Body>
-              </CardItem>
-              <CardItem footer>
-              <H3>{item.title}</H3>
-              </CardItem>
-            </Card>
-     );
-  }
+                  }
+          </View>
+          </Animatable.View>
+        );
+    };
 
-  changeItem(slideIndex){
-    this.selectedItem=this.chartList[slideIndex]
-    this.slideIndex = slideIndex
-  }
+    _updateSections = activeSections => {
+        this.setState({ activeSections });
+    };
 
-  choose(){
-    if(this.selectedItem.goName){
-      ChapterService.goByName(this.selectedItem.goName)
+    componentDidMount() {}
+
+    
+
+    @observable selectedItem = this.chartList[0]
+    slideIndex = 0
+
+    changeItem(slideIndex) {
+        this.selectedItem = this.chartList[slideIndex]
+        this.slideIndex = slideIndex
     }
-  }
 
-  render() {
-    console.warn("page deck swiper render");
-// console.log(this.chartList)
+    choose() {
+        if (this.selectedItem.goName) {
+            ChapterService.goByName(this.selectedItem.goName)
+        }
+    }
 
-    return (
+    get pagination() {
+        // const { entries, activeSlide } = this.state;
+        return (
+            <Pagination
+              dotsLength={this.chartList.length}
+              activeDotIndex={this.slideIndex}
+              dotStyle={{
+                  width: 10,
+                  height: 10,
+                  borderRadius: 5,
+                  marginHorizontal: 8,
+                  backgroundColor: 'rgba(0, 0, 0, 0.12)'
+              }}
+              inactiveDotStyle={{
+                  // Define styles for inactive dots here
+              }}
+              inactiveDotOpacity={0.4}
+              inactiveDotScale={0.6}
+            />
+        );
+    }
 
-      <Container style={coreStyle.containerCenter}>
-        <View style = {[coreStyle.overlayer,{justifyContent: 'center'}]}>
+    render() {
+        console.warn("page deck swiper render");
+
+        return (
+
+            <Container>
+        <Content padder>
+        <View style={[contentPadder]}>
+        <View style = {[{justifyContent: 'center'}]}>
           <View style={[coreStyle.containerCenter,libStyle.bgNone,{flex:0 ,width:"100%",}]}>
             <View style={[{flex:0 ,width:itemWidth}, coreStyle.H1, this.selectedItem.titleBoxStyle, dynamicStyle('p_10')]}>
               <H1 style={[{textAlign:"center"}]}>{this.content.title}</H1>
-                            <Text style={[{textAlign:"center", fontSize:10, color:"#aaa",opacity:this.content.subTitle?1:0}]}>{this.content.subTitle}</Text>
-
+              <Text style={[{textAlign:"center", fontSize:10, color:"#aaa",opacity:this.content.subTitle?1:0}]}>{this.content.subTitle}</Text>
             </View>
           </View>
-          <View style={[chartStyle.carouselBox]}>
-          <Carousel
-            ref={c => this._slider1Ref = c}
-            data= {this.chartList}
-            renderItem={this._renderItem.bind(this)}
-            sliderWidth={sliderWidth}
-            itemWidth={itemWidth}
-            loop={false}
-            onSnapToItem={this.changeItem.bind(this)}
-            layout={"default"}
-            layoutCardOffset={18}
-          />
-          </View>
+          <Accordion
+        sections={this.chartList}
+        activeSections={this.state.activeSections}
+        renderHeader={this._renderHeader}
+        renderContent={this._renderContent}
+        onChange={this._updateSections}
+        expandMultiple={true}
+      />
+
         </View>
+        </View>
+        </Content>
       </Container>
 
-    );
-  }
+        );
+    }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-  },
-  content:{
-    opacity:0,
-  }
+    container: {
+        backgroundColor: '#fff',
+    },
+    content: {
+        opacity: 0,
+    }
 });
 
 export default PageChart

@@ -28,15 +28,21 @@ let chapterList = {
                         "，歡迎來到"
                         ]
                     },{ text: [
-                        "點擊就能繼續",
+                        "點我繼續...",
                             ]
                     }
                 ],
                 [
                     { text: [
-                        "這是一個展示空間"
+                        "想寫 React-native，但又沒有產品方向"
                         ]
                     },{ text: [
+                        "因此做了這個Demo空間",
+                            ]
+                    }
+                ],
+                [
+                    { text: [
                         "請無需拘束",
                             ]
                     }
@@ -60,7 +66,7 @@ let chapterList = {
     },
     door:doorData,
     leftOrRight:leftOrRightData,
-    chart:chartData,
+    chart:Object.assign({},chartData),
     // leftOrRight:{
     //     pages:{
     //         0: {

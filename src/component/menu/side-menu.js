@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, SafeAreaView, Platform, Image, findNodeHandle } from 'react-native'
+import { StyleSheet, View, SafeAreaView, Platform, Image, findNodeHandle, Linking } from 'react-native'
 import * as Animatable from 'react-native-animatable'
 import { Container,
   Header,
@@ -88,6 +88,8 @@ export default class SideMenu extends Component {
   componentWillMount(){
     const prefix = (is_ios? "ios-" : "md-");
     this._icon_home = prefix + "home"
+    this._icon_mail = prefix + "mail"
+    this._icon_happy = prefix + "happy"
     this._icon_refresh = prefix + "refresh"
     this._icon_arrow_forward = prefix + "arrow-forward"
   }
@@ -133,6 +135,7 @@ export default class SideMenu extends Component {
               
               <ListButton onPress={()=>{this.goRouter("door")}} leftIcon={this._icon_home} bodyText="回到入口" rightIcon={this._icon_arrow_forward}/>
               <ListButton onPress={this.goIndex.bind(this)} leftIcon={this._icon_refresh} bodyText="重置狀態" rightIcon={this._icon_arrow_forward}/>
+              <ListButton onPress={()=>{Linking.openURL('mailto:inkcarve@gmail.com')}} leftIcon={this._icon_mail} bodyText="@ Email Me" rightIcon={this._icon_happy}/>
               {/*<Separator bordered />*/}
             </List>
           </Content>

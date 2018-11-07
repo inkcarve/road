@@ -21,7 +21,7 @@ class BlurBg extends Component {
 
   setViewRef(open,view) {
     // if(this.state.viewRef)return;
-    console.log(this)
+    // console.log(this)
     if(open){
       this.setState({showBlur:true})
     this.setState({ viewRef: findNodeHandle(view) });
@@ -32,7 +32,7 @@ class BlurBg extends Component {
   }
 
   blurView(){
-    console.log(this._drawer)
+    // console.log(this._drawer)
     // if(!this._drawer || !this._drawer._open)return null
     return <BlurView
           style={{

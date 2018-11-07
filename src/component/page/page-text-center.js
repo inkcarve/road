@@ -24,7 +24,7 @@ import FooterNext from "../footer/footer-next"
 
   content=ChapterService.chapterData.content
   @observable show=true
-  @observable pIndex=0
+  pIndex=0
 
   componentDidMount(){
 
@@ -33,8 +33,9 @@ import FooterNext from "../footer/footer-next"
   }
 
   nextP(){
+    this.show=false
     if(this.pIndex+1 >= this.content.length){
-      this.show=false
+      
       let goName = ChapterService.chapterData.goName
       if(goName){
         ChapterService.goByName(goName)
@@ -44,11 +45,12 @@ import FooterNext from "../footer/footer-next"
       return
     }
     this.pIndex++
+    this.show=true
   }
 
   render() {
     // console.log('TextCenter')
-    console.log(this);
+    // console.log(this);
 
     if(!this.show)return null
 

@@ -7,6 +7,9 @@ export const is_ios = Platform.OS === 'ios';
 export const viewportWidth = _viewportWidth;
 export const viewportHeight = _viewportHeight;
 
+// console.log('_viewportWidth:'+_viewportWidth)
+// console.log('_viewportHeight:'+_viewportHeight)
+
 function vw (percentage) {
     const value = (percentage * _viewportWidth) / 100;
     return Math.round(value);
@@ -80,11 +83,27 @@ const coreStyleData = {
   },
   H1:{
     marginBottom:10,
-  }
+  },
+  textSecondary:{
+    color:color.secondary
+  },
   
   // warning:{
   //   color:color.warning
   // },
+}
+
+export const contentPadding = function (w,h){
+  let outH = (viewportHeight-h)/2;
+  let outW = (viewportWidth-w)/2;
+  let result = {
+    paddingTop:outH,
+    paddingBottom:outH,
+    paddingLeft:outW,
+    paddingRight:outW,
+  }
+  console.log(result)
+  return result;
 }
 
 Object.assign(coreStyleData.overlayer,libstyleData.absLayerTopLeft)

@@ -41,6 +41,7 @@ import HeaderBox from '../header/header-box'
 import { sliderWidth, itemWidth, chartStyle } from '../../style/chart-style';
 import { leftOrRight_ChartSetting } from "../../setting/chart-data"
 import VLine from "../victory-chart/v-line"
+import { chartData } from "../../setting/chart-data"
 
 
 @observer class PageDeckSwiper extends Component<{}> {
@@ -127,18 +128,18 @@ import VLine from "../victory-chart/v-line"
 
   onSwipedAll (){
     console.log('onSwipedAll')
-    this.turnOnSwiper = false
-    console.log(this.turnOnSwiper)
+    // this.turnOnSwiper = false
+    // console.log(this.turnOnSwiper)
   }
 
   deckSwiper = ()=>{
-    let cards = this.cards
+    // let cards = this.cards
     console.log('deckSwiper')
-    console.log(this)
-    if(!this.turnOnSwiper)return null;
+    // console.log(this)
+    // if(!this.turnOnSwiper)return null;
     return  (
-      <Swiper cards={cards}
-            style={{opacity:this.turnOnSwiper?1:0}}
+      <Swiper cards={this.cards}
+            style={{opacity:this.turnOnSwiper?1:0,height:this.turnOnSwiper?'auto':0}}
             cardStyle={{justifyContent:"center", backgroundColor:'transparent'}}
             renderCard={(item) => {
                 return (
@@ -174,6 +175,7 @@ import VLine from "../victory-chart/v-line"
             backgroundColor={'transparent'}
             showSecondCard = {true}
             stackSize= {3}
+            infinite={false}
             overlayLabels={{
             // bottom: {
             //   title: 'BLEAH',
@@ -252,55 +254,19 @@ import VLine from "../victory-chart/v-line"
           }}
           /*animateOverlayLabelsOpacity*/
           /*animateCardOpacity*/>
-            {/*<Button
-                onPress={() => {console.log('oulala')}}
-                title="Press me">
-                You can press me
-            </Button>*/}
+            <View style={[coreStyle.containerCenter,{flex:1,paddingLeft:12,paddingRight:12},libStyle.justifyCenter,{alignItems:"center"}]}>
+          {<Text>一共答對 {this.statistics.correct}</Text>}
+          <Button light={false}
+          disabled={false} 
+          onPress={this.goResult.bind(this)} 
+          success 
+          bordered={false}
+          full
+          style={[coreStyle.btn,{marginTop:10,width:150,alignSelf:"center"}]}
+          ><Text>送出</Text></Button>
+          </View>
           </Swiper>)
   }
-
-  // nativeBaseDeckSwiper=(cards)=>{
-  //   return <DeckSwiper
-  //           dataSource={cards}
-  //           looping={false}
-  //           onSwipeRight={this.onSwipeRight}
-  //           onSwipeLeft={this.onSwipeLeft}
-  //           renderEmpty={() =>
-  //             <View>
-  //               <Text>Over</Text>
-  //             </View>}
-  //           renderItem={item =>
-  //             <Card style={{ elevation: 3 }}>
-  //               <CardItem>
-  //                 <Left>
-  //                   <Thumbnail source={item.image} />
-  //                   <Body>
-  //                     <Text>
-  //                       {item.text}
-  //                     </Text>
-  //                     <Text note>NativeBase</Text>
-  //                   </Body>
-  //                 </Left>
-  //               </CardItem>
-  //               <CardItem cardBody>
-  //                 <Image style={{
-  //                     resizeMode: "cover",
-  //                     width: null,
-  //                     flex: 1,
-  //                     height: 300
-  //                   }} source={item.image}
-  //                 />
-  //               </CardItem>
-  //               <CardItem>
-  //                 <IconNB name={"ios-heart"} style={{ color: "#ED4A6A" }} />
-  //                 <Text>
-  //                   {item.name}
-  //                 </Text>
-  //               </CardItem>
-  //             </Card>}
-  //         />
-  // }
 
   componentDidMount() {
     // this.animation.play();
@@ -317,11 +283,20 @@ if(this.overlayer){
   }
 
   async goResult(){
-    console.log(ChapterService.chapterList.chart.pages)
+    // console.log(ChapterService.chapterList.chart.pages)
     // let chartList = await ChapterService.chapterList.chart.pages
     leftOrRight_ChartSetting[0].data = this.timeRecord;
-    ChapterService.chapterList.chart.pages["0"].chartList = leftOrRight_ChartSetting
-    ChapterService.chapterList.chart.pages["0"].content = {...ChapterService.chapterList.chart.pages["0"].content,title:" Left/Right 結果統計",subTitle:"＊每張卡統計時間"}
+    let chartDataNew = JSON.parse(JSON.stringify(chartData))
+    chartDataNew.pages["0"]={
+      ...chartDataNew.pages["0"],
+      chartList : leftOrRight_ChartSetting,
+      content : {title:" Left/Right 結果統計",subTitle:"＊每張卡統計時間"},
+      activeSections:[0],
+    }
+    // console.log(chartDataNew)
+    ChapterService.chapterList.chart = chartDataNew;
+    // ChapterService.chapterList.chart.pages["0"].chartList = leftOrRight_ChartSetting
+    // ChapterService.chapterList.chart.pages["0"].content = {...ChapterService.chapterList.chart.pages["0"].content,title:" Left/Right 結果統計",subTitle:"＊每張卡統計時間"}
     // console.log()
     ChapterService.goByName('chart')
   }
@@ -329,12 +304,17 @@ if(this.overlayer){
   render() {
     console.warn("page deck swiper render");
 
+      if(!lottieSwipeJson){
+        return null
+      }
+
     return (
+
 
       <Container style={styles.container}>
         <HeaderBox>
         </HeaderBox>
-          <View style={[coreStyle.containerCenter,{flex:1,paddingLeft:12,paddingRight:12},libStyle.justifyCenter,{alignItems:"center"}]}>
+          {/*<View style={[coreStyle.containerCenter,{flex:1,paddingLeft:12,paddingRight:12},libStyle.justifyCenter,{alignItems:"center"}]}>
           {!this.turnOnSwiper ? <Text>一共答對 {this.statistics.correct}</Text> : null}
           <Button light={false}
           disabled={false} 
@@ -343,26 +323,9 @@ if(this.overlayer){
           bordered={false}
           full
           style={[coreStyle.btn,{marginTop:10,width:150,alignSelf:"center"}]}
-          ><Text>送出</Text></Button>
-          {/*this.nativeBaseDeckSwiper(this.cards)*/}
-          {/*<Card >
-
-              <CardItem>
-              <Body>
-              
-                <Chart 
-                  data={item.data}
-                  
-                  {...item.setting}
-                  />)
-                  </Body>
-              </CardItem>
-              <CardItem footer>
-              <H3>{item.title}</H3>
-              </CardItem>
-            </Card>*/}
-          </View>
+          ><Text>送出</Text></Button></View>*/}
      {/*     {this.turnOnSwiper ? this.deckSwiper(this.cards):null}*/}
+          {/*this.turnOnSwiper?this.deckSwiper():null*/}
           {this.deckSwiper()}
         
         {/*overlayer*/}
@@ -374,7 +337,7 @@ if(this.overlayer){
                 flex: 1 }}>
                 {mapContent(this.chapterData.overlayer)}
                 <View style={{position:'relative', height:140}}>
-                <LottieView source={lottieSwipeJson} loop={true} progress={this.progress}/>
+                <LottieView style={{}} source={lottieSwipeJson} loop={true} progress={this.progress}/>
                 </View>
             </Content>
           </Container>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {AsyncStorage, SafeAreaView, StatusBar, Dimensions, View} from 'react-native';
 import SideMenu from './component/menu/side-menu';
 import {
@@ -15,6 +15,7 @@ import {
   Lightbox,
 } from 'react-native-router-flux';
 import {getTheme, StyleProvider, platform} from 'native-base'
+import SplashScreen from 'react-native-splash-screen'
 
 import nativeBaseVar from "./style/native-base-var"
 import RouterList from './router/router-list'
@@ -53,9 +54,16 @@ const chapter = ()=>{
   return output;
 }
 
-const App = () => (
+// const App = () => (
+class App extends Component {
 
-  <View style={{flex:0, alignItems:'stretch'}}>
+  componentDidMount(){
+    SplashScreen.hide();
+  }
+
+  render(){
+    return(
+  <View style={{flex:0, alignItems:'stretch', height:'100%'}}>
   {/*<SafeAreaView style={{flex:1}}>*/}
   <StatusBar hidden={true} />
   <StyleProvider style={getTheme(nativeBaseVar)}>
@@ -81,8 +89,10 @@ const App = () => (
   </StyleProvider>
   {/*</SafeAreaView>*/}
   </View>
-  
-)
+  )
+  }
+// )
+}
 
 
 

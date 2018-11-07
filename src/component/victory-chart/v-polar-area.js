@@ -49,8 +49,8 @@ console.log(this.props)
   theme={VictoryTheme.material} {...this.props.areaSetting}
 >
     <VictoryPolarAxis dependentAxis
-      style={{ axis: { stroke: "none" } }}
       tickFormat={() => null}
+      {...this.props.dependentAxisSetting}
     />
     <VictoryPolarAxis/>
     <VictoryArea

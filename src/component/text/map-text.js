@@ -6,7 +6,8 @@ import projectSetting from "../../setting/project-setting"
 let textVarTag = projectSetting.textVarTag;
 // console.log(textVarTag)
 
-let translateVar = (text)=>{console.log("translateVar")
+let translateVar = (text)=>{
+	// console.log("translateVar")
 // console.log(text)
 // console.log(textVarTag)
 // console.log(text.search(textVarTag))
