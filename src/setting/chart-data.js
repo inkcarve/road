@@ -4,8 +4,6 @@ import VPie from "../component/victory-chart/v-pie"
 import VPolarArea from "../component/victory-chart/v-polar-area"
 import { itemWidth, chartStyleData, primaryColor, strongColor, lineStyle, barStyle, pieStyle, polarAreaStyle, barStyleHorizontal } from "../style/chart-style"
 
-// const Img = require('../image/supergirl-season-3-confirmed.jpg')
-const Img = require('../image/garfield.png')
 const _doorLeftRight = require('../image/door-left-right.jpg')
 
 
@@ -34,19 +32,6 @@ const skillData = [
     { x: 'Jquery', y: 70 },
     { x: 'NodeJs', y: 20 }
 ]
-
-
-
-// let maxAnimal = Math.max.apply(Math,animalData.map((o)=>{return o.y}))
-// console.log("maxAnimal: "+maxAnimal);
-
-// barStyle.labels.fill = (d) => {
-//               console.log("barStyle");
-//               console.log(this);
-//               return d.y === maxAnimal ? strongColor : primaryColor
-// }
-
-// console.log(barStyle.labels.fill)
 
 const vLineSetting = {
     // height:200,
@@ -186,7 +171,7 @@ export const chartList = [{
         goName: "chart",
         data: skillData,
         chartComponent: VBar,
-        
+
         setting: {
             barSetting: {
                 width: itemWidth-90,

@@ -21,7 +21,9 @@ export default class ListButton extends Component {
     // console.log(this.props);
 
     return (
-      <ListItem button icon onPress={this.props.onPress} {...this.props}>
+      <ListItem button icon
+        onPress={this.props.onPress} {...this.props}
+        style={{paddingTop:10,paddingBottom:10,height:'auto'}}>
             <Left>
               {/*<Button transparent style={coreStyle.btn}>*/}
                 <Icon name={this.props.leftIcon} style={[coreStyle.icon, coreStyle.iconMenuLeft]}/>
@@ -30,9 +32,10 @@ export default class ListButton extends Component {
             <Body>
               <Text>{this.props.bodyText}</Text>
             </Body>
-            <Right>
+            <Right style={{justifyContent:'center',minWidth:45}}>
             <Text>{this.props.RightText}</Text>
-              <Icon name={this.props.rightIcon} />
+              <Icon name={this.props.rightIcon}
+                style={[coreStyle.icon, coreStyle.iconMenuLeft, {paddingLeft:0,width:20}]}/>
             </Right>
       </ListItem>
     );

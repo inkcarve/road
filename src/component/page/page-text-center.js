@@ -19,7 +19,7 @@ import FooterNext from "../footer/footer-next"
 @observer class TextCenter extends Component<{}> {
 
   state={
-    content:[]    
+    content:[]
   };
 
   content=ChapterService.chapterData.content
@@ -35,7 +35,7 @@ import FooterNext from "../footer/footer-next"
   nextP(){
     this.show=false
     if(this.pIndex+1 >= this.content.length){
-      
+
       let goName = ChapterService.chapterData.goName
       if(goName){
         ChapterService.goByName(goName)
@@ -55,13 +55,13 @@ import FooterNext from "../footer/footer-next"
     if(!this.show)return null
 
     return (
-      
+
       <Container style={styles.container}>
       <TouchableOpacity onPress={this.nextP.bind(this)} style={coreStyle.containerCenter}>
         <Content padder contentContainerStyle={{ justifyContent: 'center', flex: 1 }}>
-          {mapContent(this.content[this.pIndex])}
+          {mapContent(this.content[this.pIndex], {textAlign:'center'})}
         </Content>
-      
+
       </TouchableOpacity>
        {/*<FooterNext data={{id:this.props.id, secId:this.props.secId}} />*/}
       </Container>

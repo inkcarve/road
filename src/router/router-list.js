@@ -4,6 +4,7 @@ import scrollContent from '../component/page/page-scroll-content';
 import deckSwiper from '../component/page/page-deck-swiper';
 import door from '../component/page/page-door';
 import chart from '../component/page/page-chart';
+import about from '../component/page/page-about';
 
 let RouterList = {
    start:{
@@ -46,6 +47,13 @@ chart:{
    name:"chart",
    component:chart,
    path:"chart",
+   emptyHeader:true,
+   hideNavBar:true,
+},
+about:{
+   name:"about",
+   component:about,
+   path:"about",
    emptyHeader:true,
    hideNavBar:true,
 },

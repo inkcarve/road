@@ -11,10 +11,18 @@ let nativeBaseVar = {
 	inputSuccessBorderColor:color.success ,
 	inputErrorBorderColor:color.error ,
 	// "btnSuccessBg": color.success,
+	brandPrimary:color.primary,
 	"brandSuccess": color.success,
 	"brandDanger": color.error,
   	"brandSuccessColor": "#fff",
-  	textColor:color.text
+  	textColor:color.text,
+		tabBgColor:"#ffffff",
+		topTabBarTextColor:color.secondary,
+		// topTabBarBorderColor:color.primary,
+		topTabBarActiveBorderColor:color.primary,
+		topTabBarActiveTextColor:color.primary,
+		tabDefaultBg:'#ffffff',
+
 }
 
 nativeBaseVar = Object.assign(varDefault,nativeBaseVar)

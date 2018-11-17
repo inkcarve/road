@@ -34,10 +34,15 @@ let reduceData = (data)=>{
 	return result
 }
 
-let mapText = (data)=>{
+let mapText = (data,textStyle)=>{
 	// console.log("mapText: "+JSON.stringify(data))
+console.log(typeof data)
+
   return data.map((obj,i)=>{
-    return (<Text key={i}>{reduceData(obj.text)}</Text>)
+		if(obj.style){
+			textStyle = Object.assign({},textStyle,obj.style);
+		}
+    return (<Text key={i} style={[textStyle]}>{reduceData(obj.text)}</Text>)
   })
 }
 

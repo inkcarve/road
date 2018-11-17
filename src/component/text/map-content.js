@@ -6,14 +6,14 @@ import { Content } from 'native-base'
 import mapText from './map-text'
 import P from './p'
 
-let mapContent = (data)=>{
+let mapContent = (data,textStyle)=>{
 	if(!data)return
 	// console.log("mapText: "+JSON.stringify(data))
   return data.map((obj,i)=>{
 
   	let text = [];
   	text[0]=obj;
-    return (<P key={i}>{mapText(text)}</P>)
+    return (<P key={i}>{mapText(text, textStyle)}</P>)
   })
 }
 

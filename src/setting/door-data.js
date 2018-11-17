@@ -1,5 +1,3 @@
-// const Img = require('../image/supergirl-season-3-confirmed.jpg')
-const Img = require('../image/garfield.png')
 const _doorLeftRight = require('../image/door-left-right.jpg')
 
 export const doorList = [
@@ -13,7 +11,8 @@ export const doorList = [
         },
         hintStyle:{},
         titleStyle:{
-            color:"#333"
+            color:"#333",
+            textAlign:"center",
         },
         hintStyle:{
             // backgroundColor: 'rgba(255, 255, 255, 0.8)',
@@ -24,18 +23,34 @@ export const doorList = [
         title:"chart",
         image:require('../image/rawpixel-790897-unsplash.jpg'),
         imageResizeMode:"cover",
-        boxBg:require('../image/adam-birkett-267843-unsplash.jpg'),
+        boxBg:require('../image/door-wall-plant-bg.jpg'),
         titleStyle:{
             // backgroundColor: 'rgba(255, 255, 255, 0.8)',
             color:"#333",
-            // textAlign:"center",
+            textAlign:"center",
         },
         hintStyle:{
             // backgroundColor: 'rgba(255, 255, 255, 0.8)',
             color:"#555"
         },
         goName:"chart"
-},  
+},
+{
+        title:"About",
+        image:require('../image/door-about-small-2.jpg'),
+        imageResizeMode:"cover",
+        boxBg:require('../image/door-leaf-bg.jpg'),
+        titleStyle:{
+            // backgroundColor: 'rgba(255, 255, 255, 0.8)',
+            color:"#333",
+            textAlign:"center",
+        },
+        hintStyle:{
+            // backgroundColor: 'rgba(255, 255, 255, 0.8)',
+            color:"#555"
+        },
+        goName:"about"
+},
 
 ]
 

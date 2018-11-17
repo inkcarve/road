@@ -22,7 +22,11 @@ function vh (percentage) {
     return Math.round(value);
 }
 
-export const vh = vh
+export const vh = vh;
+
+export const prefixIcon = name=>{
+  return (is_ios? "ios-" : "md-")+name;
+}
 
 // console.log(libStyle)
 const coreStyleData = {
@@ -84,10 +88,20 @@ const coreStyleData = {
   H1:{
     marginBottom:10,
   },
+  H1_Text:{
+    fontSize:30,
+  },
+  H3:{
+    marginTop:10,
+    marginBottom:10,
+  },
   textSecondary:{
     color:color.secondary
   },
-  
+  border:{
+    borderWidth:1,
+    borderColor:color.secondary,
+  }
   // warning:{
   //   color:color.warning
   // },

@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
-let color = {
-	primary:"#34d0ba",
+const primary = "#34d0ba";
+const color = {
+	primary:primary,
 	primaryOpacity(v){
 		return `rgba(52, 208, 186, ${v})`
 	},
@@ -19,8 +20,7 @@ let color = {
 	light:"#fcfcfc",
 	text:"#878c90",
 	hint:"#cdcdcd"
-  
+
 }
 
 export default color;
- 

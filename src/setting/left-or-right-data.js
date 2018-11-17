@@ -1,5 +1,3 @@
-// const Img = require('../image/supergirl-season-3-confirmed.jpg')
-const Img = require('../image/garfield.png')
 const _doorLeftRight = require('../image/door-left-right.jpg')
 
 import VLine from "../component/victory-chart/v-line"
@@ -55,4 +53,3 @@ export const leftOrRightData = {
             }
         }
 }
-

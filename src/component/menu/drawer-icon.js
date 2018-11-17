@@ -70,7 +70,7 @@ const Item = Picker.Item;
     // Actions.drawerOpen();
     this.props.open();
     this.animateIconOpen()
-    
+
     // UserStore.setViewRef(UserStore.viewRef);
     }else{
       // Actions.drawerClose();
@@ -89,7 +89,7 @@ const Item = Picker.Item;
 
   // getButton(){
   //   if(!this.state.progress || !drawerIconJson)return;
-  //   return (<Button transparent icon  onPress={()=>{this.click()}} 
+  //   return (<Button transparent icon  onPress={()=>{this.click()}}
   //     style={{zIndex:10000000,right:0,top:0,width:50,height:50,opacity:(ChapterService.routerData.hideCustomNav && 1)}}>
   //           <LottieView source={drawerIconJson} progress={this.state.progress}/>
   //   </Button>)
@@ -103,10 +103,10 @@ const Item = Picker.Item;
 
     return (
     <View style={[libStyle.absLayerTopRight,{
-      zIndex:10000000,left:0,top:0,width:50,height:50,justifyContent:'center',alignItems:'center'
+      zIndex:10000000,left:0,top:0,width:50,height:50,justifyContent:'center',alignItems:'center',overflow:'hidden',
     },{height:(this.hideCustomNav ? 0 : 50),opacity:(this.hideCustomNav ? 0 : 1)}]} none={this.hideCustomNav}>
     {/*this.getButton()*/}
-    <Button transparent icon onPress={()=>{this.click()}} 
+    <Button transparent icon onPress={()=>{this.click()}}
       style={{alignSelf:'center',width:50,height:50,justifyContent:'center',alignItems:'center',opacity:(ChapterService.routerData.hideCustomNav && 1)}}>
             <View style={{width:50,height:50,justifyContent:'center',alignItems:'center'}}>
             <LottieView style={{width:200,height:200}} source={drawerIconJson} progress={this.state.progress}/>
@@ -118,5 +118,3 @@ const Item = Picker.Item;
 }
 
 export default DrawerIcon
-
-

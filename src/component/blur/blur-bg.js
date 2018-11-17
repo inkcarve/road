@@ -8,7 +8,7 @@ import {observable} from 'mobx'
 import UserStore from '../../store/user-store';
 import ChapterService from '../../setting/chapter-service';
 
-class BlurBg extends Component {  
+class BlurBg extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -41,8 +41,8 @@ class BlurBg extends Component {
           }}
           viewRef={this.state.viewRef}
           blurType="light"
-          blurAmount={100}
-          blurRadius={15}
+          blurAmount={8}
+          blurRadius={10}
           downsampleFactor={5}
           overlayColor={'rgba(255, 255, 255, .25)'}
         />

@@ -7,7 +7,6 @@ import { Container,
   Content,
   Button,
   Icon,
-
   ListItem,
   List,
   Text,
@@ -24,7 +23,7 @@ import FastImage from 'react-native-fast-image'
 import { BlurView } from 'react-native-blur';
 
 import coreStyle from "../../style/core-style"
-import {is_ios} from '../../style/core-style'
+import {is_ios, prefixIcon} from '../../style/core-style'
 import libStyle from "../../style/lib-style"
 import dynamicStyle from "../../style/dynamic-style"
 
@@ -63,9 +62,9 @@ export default class SideMenu extends Component {
   }
 
   async clearData(){
-    
+
     ChapterService.clearData()
-    
+
   }
 
   blurView(){
@@ -103,8 +102,8 @@ export default class SideMenu extends Component {
     console.log('render drawer')
 
     return (
-    
-        <Container style={[{backgroundColor:"rgba(255,255,255,0.85)"}]}>
+
+        <Container style={[{backgroundColor:"rgba(255,255,255,0.85)",flex:1,width:'100%',height:'100%'}]}>
       {/*  <DrawerIcon {...this.props}>
   </DrawerIcon>*/}
         {/*  <BlurView
@@ -128,14 +127,19 @@ export default class SideMenu extends Component {
           <Right />
         </Header>*/}
 
-        <View style={[{padding:0,flex:1,flexDirection:'column',justifyContent:'flex-start',alignItems:'stretch'},libStyle.bgNone]}>
-          <Content style={[libStyle.bgNone,{paddingTop:50}]}>
+        <View style={[{padding:0,flex:1,flexDirection:'row',justifyContent:'center',width:'100%'},libStyle.bgNone]}>
+          <Content style={[libStyle.bgNone,{paddingTop:60, paddingBottom:60}]}>
           {/*<Separator bordered noTopBorder style={coreStyle.saparator}/>*/}
             <List>
-              
+
               <ListButton onPress={()=>{this.goRouter("door")}} leftIcon={this._icon_home} bodyText="回到入口" rightIcon={this._icon_arrow_forward}/>
               <ListButton onPress={this.goIndex.bind(this)} leftIcon={this._icon_refresh} bodyText="重置狀態" rightIcon={this._icon_arrow_forward}/>
-              <ListButton onPress={()=>{Linking.openURL('mailto:inkcarve@gmail.com')}} leftIcon={this._icon_mail} bodyText="@ Email Me" rightIcon={this._icon_happy}/>
+              <ListButton onPress={()=>{this.goRouter("about")}} leftIcon={this._icon_refresh} bodyText="關於" rightIcon={this._icon_arrow_forward}/>
+              <ListButton onPress={()=>{Linking.openURL('https://github.com/inkcarve')}} leftIcon="logo-github" bodyText="GitHub / inkcarve" rightIcon={null}/>
+              <ListButton onPress={()=>{Linking.openURL('tel://+886982783047')}} leftIcon={prefixIcon('call')} bodyText="Call Me / +886 0982783047" rightIcon={null}/>
+              <ListButton onPress={()=>{Linking.openURL('mailto:inkcarve@gmail.com')}} leftIcon={this._icon_mail} bodyText="Email Me / inkcarve@gmail.com" rightIcon={null}/>
+              <ListButton onPress={()=>{Linking.openURL('https://ting-wei-log.herokuapp.com/resume')}} leftIcon={prefixIcon('sunny')} bodyText="More About Me in Web Site" rightIcon={null}/>
+
               {/*<Separator bordered />*/}
             </List>
           </Content>
@@ -154,5 +158,3 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start'
   }
 });
-
-
