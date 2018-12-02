@@ -5,7 +5,7 @@ import * as Animatable from "react-native-animatable";
 import { Button , Container, Content, Grid, Row, Col} from "native-base"
 import {Actions} from 'react-native-router-flux'
 import {observer} from 'mobx-react'
-import {observable} from 'mobx'
+import {observable, action} from 'mobx'
 
 //** import style
 import coreStyle from '../../style/core-style'
@@ -42,7 +42,7 @@ import ChapterService from '../../setting/chapter-service'
     }
   }
 
-  leave(){
+  @action leave(){
     console.log('leave')
     this.show=false
     ChapterService.go();
@@ -57,7 +57,7 @@ import ChapterService from '../../setting/chapter-service'
 
     if(!this.show)return null
     // console.log(this.props.name)
-    // console.log(ChapterService.routerData.tpl)
+    console.log('render start')
     // if(this.props.name!==ChapterService.routerData.tpl)return null
 
     return (

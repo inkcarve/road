@@ -138,7 +138,7 @@ export default class SideMenu extends Component {
               <ListButton onPress={()=>{Linking.openURL('https://github.com/inkcarve')}} leftIcon="logo-github" bodyText="GitHub / inkcarve" rightIcon={null}/>
               <ListButton onPress={()=>{Linking.openURL('tel://+886982783047')}} leftIcon={prefixIcon('call')} bodyText="Call Me / +886 0982783047" rightIcon={null}/>
               <ListButton onPress={()=>{Linking.openURL('mailto:inkcarve@gmail.com')}} leftIcon={this._icon_mail} bodyText="Email Me / inkcarve@gmail.com" rightIcon={null}/>
-              <ListButton onPress={()=>{Linking.openURL('https://ting-wei-log.herokuapp.com/resume')}} leftIcon={prefixIcon('sunny')} bodyText="More About Me in Web Site" rightIcon={null}/>
+              <ListButton onPress={()=>{Linking.openURL('https://road-of-ting-wei.herokuapp.com/resume')}} leftIcon={prefixIcon('sunny')} bodyText="More About Me in Website" rightIcon={null}/>
 
               {/*<Separator bordered />*/}
             </List>

@@ -99,7 +99,7 @@ export const aboutData = {
                     <Icon name={prefixIcon('call')}></Icon>
                   {/* <Text style={{fontSize:12, paddingLeft:0}}>Phone</Text> */}
                 </Button>
-                <Button style={[{margin:2, justifyContent:'center'}]} bordered onPress={()=>{Linking.openURL('https://ting-wei-log.herokuapp.com/resume')}}>
+                <Button style={[{margin:2, justifyContent:'center'}]} bordered onPress={()=>{Linking.openURL('https://road-of-ting-wei.herokuapp.com/resume')}}>
                     <Text style={[{paddingRight:0}]}>More</Text><Icon name={prefixIcon('sunny')}></Icon>
                   {/* <Text style={{fontSize:12, paddingLeft:0}}>Phone</Text> */}
                 </Button>

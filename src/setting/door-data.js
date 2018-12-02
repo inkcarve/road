@@ -1,4 +1,3 @@
-const _doorLeftRight = require('../image/door-left-right.jpg')
 
 export const doorList = [
     {
