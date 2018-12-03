@@ -12,7 +12,7 @@ import UserStore from '../../store/user-store';
 import ChapterService from '../../setting/chapter-service';
 import BlurBg from '../blur/blur-bg'
 
-class DrawerBox extends Component {  
+class DrawerBox extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -95,7 +95,7 @@ class DrawerBox extends Component {
         onClose={this.onClose.bind(this)}
         // style={drawerStyles}
         >
-        
+
         <View style={{flex: 1}} ref={(e) => {this.viewRef = e}}>
         {this.props.children}
 
@@ -114,4 +114,3 @@ const drawerStyles = {
   drawer: { shadowColor: '#000000', shadowOpacity: 0.8, shadowRadius: 3},
   main: {paddingLeft: 3},
 }
-

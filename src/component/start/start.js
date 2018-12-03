@@ -62,17 +62,20 @@ import ChapterService from '../../setting/chapter-service'
 
     return (
       <View style={styles.container}>
-      <TouchableOpacity onPress={this.startViewClick}>
+
       {
-      this.state.startViewEnd?null:(
+      this.state.startViewEnd ?
+      (<Animatable.View animation={"fadeIn"}><StartIndex leave={this.leave.bind(this)}/></Animatable.View>)
+      :
+      (<TouchableOpacity onPress={this.startViewClick}>
         <Animatable.View useNativeDriver={true} ref={this.handleViewRef}>
           <StartView></StartView>
-        </Animatable.View>
+        </Animatable.View></TouchableOpacity>
       )
       }
-      </TouchableOpacity>
+
       {/*<View style={styles.container}>*/}
-      {this.state.startViewEnd?(<Animatable.View animation={"fadeIn"}><StartIndex leave={this.leave.bind(this)}/></Animatable.View>):null}
+  
       {/*</View>*/}
       </View>
     );

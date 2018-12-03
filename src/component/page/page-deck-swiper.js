@@ -20,7 +20,7 @@ import {  Container,
 import Swiper from 'react-native-deck-swiper'
 import FastImage from 'react-native-fast-image'
 import {observer} from 'mobx-react'
-import {observable} from 'mobx'
+import {observable, action} from 'mobx'
 import LottieView from 'lottie-react-native';
 import lottieSwipeJson from '../../lottie/swipe.json'
 
@@ -60,12 +60,12 @@ import { chartData } from "../../setting/chart-data"
         count:0
       },
       correct:0,
-      
+
     }
   @observable chapterData = ChapterService.getContent();
   @observable cards = ChapterService.getContent().cards;
   @observable overlayer = true
-  @observable footer = false 
+  @observable footer = false
   @observable turnOnSwiper = true
   @observable progress = new Animated.Value(0)
 
@@ -90,7 +90,7 @@ import { chartData } from "../../setting/chart-data"
   }
 
   handleViewRef = ref => this.view = ref;
-  overlayerClick = ()=> {
+  @action overlayerClick = ()=> {
     this.view.fadeOut(300).then(endState => {
       if(endState) {
         this.overlayer=false;
@@ -99,37 +99,30 @@ import { chartData } from "../../setting/chart-data"
     });
   }
 
-  onSwipeCallBack = (data)=>{
+  @action onSwipeCallBack = (data)=>{
     let card = this.cards[data.index];
     this.statistics[data.side].count++;
     this.timeRecord.push({x:data.index+1,y:this.timeCount})
     if(card.value === data.side){
       this.statistics.correct++;
     }
+    this.timerStop()
+    if(data.index<this.cards.length){
+    this.timerStart()
+    }
+    // console.log(data.index)
   }
 
   onSwipeRight = i=>{console.log('onSwipeRight');
     this.onSwipeCallBack({side:'r',index:i})
-    this.timerStop()
-    if(i<this.cards.length){
-    this.timerStart()
-    }
-    console.log(i)
   }
 
   onSwipeLeft = i=>{console.log('onSwipeLeft');
     this.onSwipeCallBack({side:'l',index:i})
-    this.timerStop()
-    if(i<this.cards.length){
-    this.timerStart()
-  }
-    console.log(i)
   }
 
   onSwipedAll (){
     console.log('onSwipedAll')
-    // this.turnOnSwiper = false
-    // console.log(this.turnOnSwiper)
   }
 
   deckSwiper = ()=>{
@@ -146,7 +139,7 @@ import { chartData } from "../../setting/chart-data"
               <View style={[coreStyle.containerCenter,{alignItems:"center",height:'100%', backgroundColor:'#ececec'}]}>
               <Card  style={leftOrRightStyle.card}>
                 <CardItem cardBody style={leftOrRightStyle.cardBody}>
-                  
+
                   <FastImage
                   resizeMode={FastImage.resizeMode.contain}
                     style={{
@@ -156,7 +149,7 @@ import { chartData } from "../../setting/chart-data"
                     }}
                     source={item.image}
                   />
-                  
+
                 </CardItem>
               </Card>
               </View>
@@ -257,9 +250,9 @@ import { chartData } from "../../setting/chart-data"
             <View style={[coreStyle.containerCenter,{flex:1,paddingLeft:12,paddingRight:12},libStyle.justifyCenter,{alignItems:"center"}]}>
           {<Text>一共答對 {this.statistics.correct}</Text>}
           <Button light={false}
-          disabled={false} 
-          onPress={this.goResult.bind(this)} 
-          success 
+          disabled={false}
+          onPress={this.goResult.bind(this)}
+          success
           bordered={false}
           full
           style={[coreStyle.btn,{marginTop:10,width:150,alignSelf:"center"}]}
@@ -317,9 +310,9 @@ if(this.overlayer){
           {/*<View style={[coreStyle.containerCenter,{flex:1,paddingLeft:12,paddingRight:12},libStyle.justifyCenter,{alignItems:"center"}]}>
           {!this.turnOnSwiper ? <Text>一共答對 {this.statistics.correct}</Text> : null}
           <Button light={false}
-          disabled={false} 
-          onPress={this.goResult.bind(this)} 
-          success 
+          disabled={false}
+          onPress={this.goResult.bind(this)}
+          success
           bordered={false}
           full
           style={[coreStyle.btn,{marginTop:10,width:150,alignSelf:"center"}]}
@@ -327,12 +320,12 @@ if(this.overlayer){
      {/*     {this.turnOnSwiper ? this.deckSwiper(this.cards):null}*/}
           {/*this.turnOnSwiper?this.deckSwiper():null*/}
           {this.deckSwiper()}
-        
+
         {/*overlayer*/}
         {this.overlayer?(<TouchableOpacity onPress={this.overlayerClick}  style={[coreStyle.overlayer]}>
         <Animatable.View useNativeDriver={true} ref={this.handleViewRef} style={coreStyle.containerCenter}>
           <Container style={coreStyle.containerCenter}>
-            <Content padder contentContainerStyle={{ 
+            <Content padder contentContainerStyle={{
                 justifyContent: 'center',
                 flex: 1 }}>
                 {mapContent(this.chapterData.overlayer)}
