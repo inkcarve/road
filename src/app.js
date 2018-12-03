@@ -42,7 +42,7 @@ let init = async ()=>{
 
 let codePushOptions = {
       checkFrequency: CodePush.CheckFrequency.ON_APP_START,
-      installMode: CodePush.InstallMode.ON_NEXT_RESTART,
+      installMode: CodePush.InstallMode.IMMEDIATE,
       updateDialog: true
 };
 

@@ -10,7 +10,7 @@ class UserStore {
   @observable chapterData={}
   @observable winSize
   @observable blurViewRef
-  @observable loading:booleam = false
+  @observable loading:booleam = true
 
   load = async ()=>{
     this.winSize = Dimensions.get('window');
