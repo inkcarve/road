@@ -25,7 +25,9 @@
     "android": "watchman watch-del-all && react-native run-android",
     "dev": "yarn react-devtools",
     "postinstall": "sed -i '' 's#<fishhook/fishhook.h>#\"fishhook.h\"#g' ./node_modules/react-native/Libraries/WebSocket/RCTReconnectingWebSocket.m",
-    "test": "jest"
+    "test": "jest",
+    "prod-hot-ios": "code-push release-react road-ios ios --deploymentName Production",
+    "prod-hot-android": "code-push release-react road-android android --deploymentName Production"
   },
   "jest": {
     "preset": "react-native"
@@ -42,10 +44,11 @@
     "react-native-blur": "^3.2.2",
     "react-native-chart-kit": "^1.1.5",
     "react-native-charts-wrapper": "^0.5.0",
+    "react-native-code-push": "^5.4.2",
     "react-native-collapsible": "^1.3.0",
     "react-native-deck-swiper": "^1.5.22",
     "react-native-drawer": "^2.5.0",
-    "react-native-fast-image": "^5.0.11",
+    "react-native-fast-image": "^5.1.1",
     "react-native-fetch-blob": "^0.10.8",
     "react-native-fs": "^2.10.14",
     "react-native-material-kit": "^0.5.1",

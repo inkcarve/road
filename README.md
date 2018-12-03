@@ -1,5 +1,7 @@
+download APK from my google Driver [https://drive.google.com/open?id=1ixrg8WhWQChR_KTav5_e2EvtQomoCQ_D]
+
 react-native version 0.55.4
-## install 
+## install
 ```
 * $ yarn global add react-native-cli
 * $ yarn global add rnpm
@@ -86,7 +88,7 @@ react-native bundle --platform android --dev false --entry-file index.android.js
 
 ```
 * error: cannot find symbol 'ReactActivity', You can do "File" -> "Invalidate Caches...", and select "Invalidate and Restart" option to fix this.
-If the first one doesn't work, you can 
+If the first one doesn't work, you can
 Exit Android Studio
 Back up your project
 Delete all the .iml files and the .idea folder
@@ -143,7 +145,3 @@ android {
     "build-android":"react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
 ```
 4. test in android device, connect device by USB (need turn off device setting )
-
-
-
-

@@ -39,13 +39,13 @@ export default class StartView extends Component<{}> {
         onAnimationEnd={this.subTitleAnimEnd}
         style={{fontSize:10, marginBottom:4, color:color.primaryR}}>Welcome!</Animatable.Text>
 
-        {/*<LetterAnimate 
+        {/*<LetterAnimate
           animation={"fadeIn"}
           fire={this.state.subTitleEnd}
           onAnimationEnd={this.titleAnimEnd}
-          letters={"New-Customers"} 
-          delay={50} 
-          style={{ marginBottom:10, alignItems:'center',flexDirection:'row', minHeight:30}} 
+          letters={"New-Customers"}
+          delay={50}
+          style={{ marginBottom:10, alignItems:'center',flexDirection:'row', minHeight:30}}
           letterStyle={{fontSize:24, fontStyle:'italic'}}
           fullRepeat={true}
           fullRepeatDelay={1000}></LetterAnimate>*/}
@@ -54,12 +54,12 @@ export default class StartView extends Component<{}> {
         animation={this.state.subTitleEnd?"fadeIn":null} style={[styles.center,{opacity:this.state.subTitleEnd?1:0},
         { marginBottom:10, alignItems:'center',flexDirection:'row', minHeight:30, fontSize:24, fontStyle:'italic', color:color.primary}]}>
         New-Customers
-    
+
         {/*  <Animatable.Text delay={500}
           easing="ease-out"
           iterationCount="infinite" animation={this.state.subTitleEnd?"pulse":null} style={[styles.center,{opacity:this.state.subTitleEnd?1:0}]}>New-Customers</Animatable.Text>*/}
         </Animatable.Text>
-        
+
         <Animatable.View animation="fadeIn">
           <Animatable.View delay={500}
           easing="ease-out"

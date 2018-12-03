@@ -1,3 +1,4 @@
 <resources>
+    <string moduleConfig="true" name="reactNativeCodePush_androidDeploymentKey">HGZ_tEc9fCemB9-zSKdLLH1FBMc835bec2f8-a8fc-43ba-aa14-2f7216857de2</string>
     <string name="app_name">road</string>
 </resources>

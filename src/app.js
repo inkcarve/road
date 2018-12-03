@@ -25,13 +25,13 @@ import {observer , observable} from 'mobx'
 import UserStore from './store/user-store'
 import DrawerIcon from './component/menu/drawer-icon'
 import DrawerBox from './component/menu/drawer-box'
-
+import CodePush from 'react-native-code-push';
 
 let winSize = Dimensions.get('window');
 
 // global.UserStore = UserStore;
 // UserStore;
-let init = async ()=>{ 
+let init = async ()=>{
   await ChapterService.init()
 // setTimeout(()=>{Actions.drawerOpen()},1000)
 }
@@ -54,12 +54,38 @@ const chapter = ()=>{
   return output;
 }
 
+
+
 // const App = () => (
 class App extends Component {
 
+  state = { restartAllowed: true };
+
   componentDidMount(){
+
     SplashScreen.hide();
+    // CodePush.sync({ updateDialog: true, installMode: CodePush.InstallMode.IMMEDIATE },
+    //   (status) => {
+    //     // switch (status) {
+    //     //   case CodePush.SyncStatus.DOWNLOADING_PACKAGE:
+    //     //     this.setState({showDownloadingModal: true});
+    //     //     break;
+    //     //   case CodePush.SyncStatus.INSTALLING_UPDATE:
+    //     //     this.setState({showInstalling: true});
+    //     //     break;
+    //     //   case CodePush.SyncStatus.UPDATE_INSTALLED:
+    //     //     this.setState({showDownloadingModal: false});
+    //     //     break;
+    //     // }
+    //
+    //   },
+    //   ({ receivedBytes, totalBytes, }) => {
+    //       this.setState({downloadProgress: receivedBytes / totalBytes * 100});
+    //   }
+    // );
   }
+
+
 
   render(){
     return(
@@ -72,9 +98,9 @@ class App extends Component {
   <Router wrapBy={observer}>
   <Lightbox key="lightbox">
     <Stack key="root">
-      {/*<Drawer key="SideMenu" 
+      {/*<Drawer key="SideMenu"
        drawerIcon={null}
-       contentComponent={SideMenu} 
+       contentComponent={SideMenu}
        drawerWidth={winSize.width-50}
        drawerBackgroundColor='rgba(255,255,255, 0.95)'
        hideDrawerButton={true}
@@ -94,6 +120,11 @@ class App extends Component {
 // )
 }
 
-
+let codePushOptions = {
+      checkFrequency: CodePush.CheckFrequency.ON_APP_START,
+      installMode: CodePush.InstallMode.ON_NEXT_RESTART,
+      updateDialog: true
+};
+App = CodePush(codePushOptions)(App);
 
 export default App;
